@@ -7,7 +7,7 @@ pygame.init()
 screen = pygame.display.set_mode((750,750))
 screen_width, screen_height = screen.get_size()
 
-step = 5
+step = 10
 toggle = True
 
 class Capitol:
@@ -42,8 +42,8 @@ capitols = [paris]
 for i in range(step):
     x = randint(0,screen_width)
     y = randint(0,screen_height)
-    #colour = (randint(0,255),randint(0,255),randint(0,255))
-    colour = (0,0,0)
+    colour = (randint(0,255),randint(0,255),randint(0,255))
+    #colour = (0,0,0)
     cap = Capitol(x,y,colour)
     capitols.append(cap)
 

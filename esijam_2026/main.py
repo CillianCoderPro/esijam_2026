@@ -1,3 +1,4 @@
+from random import randint
 from CONSTANTS import *
 
 pygame.init()
@@ -16,6 +17,15 @@ class Cube:
         self.z = z_offset
         self.image = image
 
+    """
+    def random_drop(self):
+        self.row = randint(0, NUMBER_OF_CUBES - 1)
+        self.file = randint(0, NUMBER_OF_CUBES - 1)
+        self.col = randint(0, NUMBER_OF_LAYERS - 1)
+        self.z = 100
+        #100, randint(0, NUMBER_OF_CUBES - 1), randint(0, NUMBER_OF_CUBES - 1), randint(0, NUMBER_OF_CUBES), BLUE_CUBE_IMAGE)
+    """
+
     def draw(self):
         screen.blit(self.image, (self.x + self.x_offset, self.y + self.y_offset - self.z - self.col * GAP_SIZE * CUBE_SIZE * 0.5))
 
@@ -28,24 +38,40 @@ class Map:
                     self.cube_dict[row, file, col] = Cube(screen.get_width()/2, (screen.get_height() - TOTAL_GRID_HEIGHT)/2, 0, row, file, col, WHITE_CUBE_IMAGE)
 
     def draw(self):
+        for row in range(NUMBER_OF_CUBES):
+            for file in range(NUMBER_OF_CUBES):
+                for col in range(NUMBER_OF_LAYERS+1):
+                    cube = self.cube_dict.get((row, file, col))
+                    if cube:
+                        cube.draw()
+        """
         for coord, cube in self.cube_dict.items():
             cube.x_offset = screen.get_width()/2
             cube.y_offset = ( screen.get_height() - TOTAL_GRID_HEIGHT ) /2
             cube.draw()
+        """
+
+
 
 
 #create_grid(NUMBER_OF_CUBES)
 grid = Map()
 
 coords = [0,0,TOP_LAYER]
-print(grid.cube_dict[0,0,TOP_LAYER])
-cube1 = Cube(screen.get_width()/2, (screen.get_height() - TOTAL_GRID_HEIGHT)/2, 0, 0, 0, TOP_LAYER, RED_CUBE_IMAGE)
-cube1.z = CUBE_SIZE*0.5
+cube1 = Cube(screen.get_width()/2, (screen.get_height() - TOTAL_GRID_HEIGHT)/2, CUBE_SIZE*0.5, 0, 0, TOP_LAYER, RED_CUBE_IMAGE)
+
+cube = Cube(screen.get_width() / 2, (screen.get_height() - TOTAL_GRID_HEIGHT) / 2, 100, randint(0, NUMBER_OF_CUBES - 1), randint(0, NUMBER_OF_CUBES - 1), randint(0, NUMBER_OF_LAYERS), BLUE_CUBE_IMAGE)
 
 while True:
     screen.fill((100, 150, 100))
     grid.draw()
     cube1.draw()
+    if cube.z > 0 + CUBE_SIZE*0.5:
+        cube.z -= 1
+        cube.draw()
+    else:
+        grid.cube_dict[cube.row, cube.file, cube.col+1] = cube
+        cube = Cube(screen.get_width() / 2,(screen.get_height() - TOTAL_GRID_HEIGHT) / 2,100,randint(0, NUMBER_OF_CUBES - 1), randint(0, NUMBER_OF_CUBES - 1),randint(0, NUMBER_OF_LAYERS - 1), BLUE_CUBE_IMAGE,)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -54,7 +80,7 @@ while True:
 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                print(cube1.x,cube1.y)
+                continue
             if event.key == pygame.K_UP:
                 print(coords)
                 coords[0] -= 1

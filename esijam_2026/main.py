@@ -9,7 +9,7 @@ pygame.display.set_caption(CAPTION)
 cube_dictionary = {}
 
 class Cube:
-    def __init__(self, x_offset, y_offset, w=16, h=16, row=0, col=0, z=0, image = WHITE_CUBE_IMAGE):
+    def __init__(self, x_offset, y_offset, w=CUBE_SIZE, h=CUBE_SIZE, row=0, col=0, z=0, image = WHITE_CUBE_IMAGE):
         self.width = w
         self.height = h
         self.x = (col - row - 1) * w * 0.5 + x_offset
@@ -43,9 +43,11 @@ def draw_grid():
 
 create_grid(10)
 coords = [0,0]
-cube1 = cube_dictionary[coords[0], coords[1]]
+cube1 = Cube(0,0, CUBE_SIZE, CUBE_SIZE, 0, 0, CUBE_SIZE, RED_CUBE_IMAGE)
 cube1.image = RED_CUBE_IMAGE
 cube1.z = cube1.height*0.5
+
+print(cube_dictionary)
 
 while True:
     screen.fill((100, 150, 100))
@@ -54,6 +56,7 @@ while True:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            print(cube_dictionary)
             pygame.quit()
             exit()
 
@@ -81,4 +84,5 @@ while True:
 
     pygame.display.flip()
     CLOCK.tick(60)
+
 

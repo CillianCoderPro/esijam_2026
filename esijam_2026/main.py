@@ -27,37 +27,36 @@ class Cube:
 
 class Map:
 
-    def __init__(self, number_of_cubes, number_of_layers):
+    def __init__(self, number_of_cubes, number_of_layers, gap_size=1):
         self.number_of_cubes = number_of_cubes
         self.number_of_layers = number_of_layers
+        self.gap_size = gap_size
+        self.cube_dict = {}
+        for row in range(self.number_of_cubes):
+            for file in range(self.number_of_cubes):
+                for col in range(0, self.number_of_layers * self.gap_size, self.gap_size):
+                    self.cube_dict[row, file, col] = Cube(screen.get_width()/2, (screen.get_height() - TOTAL_GRID_HEIGHT)/2, 0, CUBE_SIZE, CUBE_SIZE, row, file, col*0.5, WHITE_CUBE_IMAGE)
+        print(self.cube_dict)
 
-def create_grid(number_of_cubes):
-    screen_width, screen_height = screen.get_size()
-    x_offset = screen_width /2
-    y_offset = (screen.get_height() - TOTAL_GRID_HEIGHT) /2
+    def draw(self):
+        for coord, cube in self.cube_dict.items():
+            cube.x_offset = screen.get_width()/2
+            cube.y_offset = ( screen.get_height() - TOTAL_GRID_HEIGHT ) /2
+            cube.draw()
 
-    for row in range(number_of_cubes):
-        for file in range(number_of_cubes):
-            cube = Cube(x_offset, y_offset, 0, CUBE_SIZE, CUBE_SIZE, row, file,0, WHITE_CUBE_IMAGE)
-            cube_dictionary[row, file, 0] = cube
 
-def draw_grid():
-    for key, cube in cube_dictionary.items():
-        cube.x_offset = screen.get_width()/2
-        cube.y_offset = (screen.get_height() - TOTAL_GRID_HEIGHT) /2
-        cube.draw()
-
-create_grid(NUMBER_OF_CUBES)
-coords = [0,0,0]
-cube1 = Cube(screen.get_width()/2,(screen.get_height() - TOTAL_GRID_HEIGHT) /2, CUBE_SIZE, CUBE_SIZE, CUBE_SIZE, 0, 0, 0, RED_CUBE_IMAGE)
-cube1.image = RED_CUBE_IMAGE
+#create_grid(NUMBER_OF_CUBES)
+grid = Map(NUMBER_OF_CUBES, NUMBER_OF_LAYERS, 1)
+coords = [0,0,NUMBER_OF_LAYERS-1]
+cube1 = Cube(screen.get_width()/2,(screen.get_height() - TOTAL_GRID_HEIGHT)/2, 0, CUBE_SIZE, CUBE_SIZE, 0, 0, NUMBER_OF_CUBES-1, RED_CUBE_IMAGE)
 cube1.z = cube1.height*0.5
 
 print(cube_dictionary)
 
 while True:
     screen.fill((100, 150, 100))
-    draw_grid()
+    #draw_grid()
+    grid.draw()
     cube1.draw()
 
     for event in pygame.event.get():
@@ -88,10 +87,18 @@ while True:
                 if (coords[0], coords[1], coords[2]) not in cube_dictionary:
                     coords[1] -= 1
 
+    """
     cube1.x = cube_dictionary[coords[0], coords[1], coords[2]].x
     cube1.x_offset = screen.get_width()/2
     cube1.y = cube_dictionary[coords[0], coords[1], coords[2]].y
     cube1.y_offset = (screen.get_height() - TOTAL_GRID_HEIGHT) /2
+    """
+
+    cube1.x = grid.cube_dict[coords[0], coords[1], coords[2]].x
+    cube1.x_offset = screen.get_width() / 2
+    cube1.y = grid.cube_dict[coords[0], coords[1], coords[2]].y
+    cube1.y_offset = (screen.get_height() - TOTAL_GRID_HEIGHT) / 2
+
 
     pygame.display.flip()
     CLOCK.tick(60)

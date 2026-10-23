@@ -6,10 +6,11 @@ CAPTION = "esijam_2026"
 CLOCK = pygame.time.Clock()
 
 CUBE_SIZE = 50
-NUMBER_OF_CUBES = 5
-NUMBER_OF_LAYERS = NUMBER_OF_CUBES
-TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5
-GAP_SIZE = 1
+NUMBER_OF_CUBES = 3
+NUMBER_OF_LAYERS = 5
+GAP_SIZE = 4# must be greater than 0
+TOP_LAYER = NUMBER_OF_LAYERS - 1
+TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5
 
 """sprites"""
 WHITE_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/white_cube.png'), (CUBE_SIZE, CUBE_SIZE))

@@ -4,7 +4,6 @@ from Grid import Grid
 
 
 grid = Grid()
-
 list_of_players = []
 
 for i in range(NUMBER_OF_PLAYERS):
@@ -12,12 +11,6 @@ for i in range(NUMBER_OF_PLAYERS):
     image = PLAYER_CONFIGURATIONS[i]["image"]
     player = Player(row, file, TOP_LAYER, image)
     list_of_players.append(player)
-
-
-SCREEN.fill((100, 150, 100))
-grid.draw(list_of_players)
-pygame.display.flip()
-pygame.time.wait(1000)
 
 while True:
     SCREEN.fill((100, 150, 100))
@@ -32,8 +25,7 @@ while True:
             for i, player in enumerate(list_of_players):
                 if event.key in PLAYER_CONFIGURATIONS[i]["moves"]:
                     d_row,d_file,d_col = PLAYER_CONFIGURATIONS[i]["moves"][event.key]
-                    player.move(d_row, d_file, d_col, grid)
-
+                    player.move(d_row, d_file, d_col, grid, list_of_players)
 
     for player in list_of_players:
         player.update_state(grid)

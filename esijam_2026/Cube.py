@@ -43,10 +43,13 @@ class Player(Cube):
         else:
             grid.cube_dict[self.row, self.file, self.col].transparency -= 5
 
-    def move(self, d_row, d_file, d_col, grid):
+    def move(self, d_row, d_file, d_col, grid, list_of_players):
         if self.state == "eliminated":
             return
         target_position = (self.row + d_row, self.file + d_file, self.col + d_col)
+        for player in list_of_players:
+            if target_position == (player.row, player.file, player.col):
+                return
         if target_position in grid.cube_dict:
             self.row, self.file, self.col = target_position
 

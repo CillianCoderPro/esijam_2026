@@ -4,6 +4,8 @@ import pygame
 INITIAL_SCREEN_SIZE = (600,600)
 CAPTION = "esijam_2026"
 CLOCK = pygame.time.Clock()
+SCREEN = pygame.display.set_mode(INITIAL_SCREEN_SIZE, pygame.RESIZABLE)
+
 
 MOVES = {
     pygame.K_z: (-1, 0, 0),

@@ -34,6 +34,15 @@ class Player(Cube):
         self.z = CUBE_SIZE * 0.5
         self.state = "alive"
 
+    def update_state(self, grid):
+        if (self.row, self.file, self.col) not in grid.cube_dict.keys():
+            self.state = "eliminated"
+        elif grid.cube_dict[self.row, self.file, self.col].transparency < -100:
+            grid.cube_dict.pop((self.row, self.file, self.col))
+            self.col -= 1
+        else:
+            grid.cube_dict[self.row, self.file, self.col].transparency -= 5
+
     def move(self, d_row, d_file, d_col, grid):
         if self.state == "eliminated":
             return

@@ -36,14 +36,7 @@ while True:
 
 
     for player in list_of_players:
-        try:
-            if grid.cube_dict[player.row, player.file, player.col].transparency <-100:
-                    grid.cube_dict.pop((player.row, player.file, player.col))
-                    player.col -= 1
-            else:
-                grid.cube_dict[player.row, player.file, player.col].transparency -= 5
-        except:
-            player.state = "eliminated"
+        player.update_state(grid)
 
     pygame.display.flip()
     CLOCK.tick(60)

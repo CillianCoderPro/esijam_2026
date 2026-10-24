@@ -83,17 +83,13 @@ while True:
         elif event.type == pygame.KEYDOWN:
 
             if event.key in MOVES:
-                x,y = MOVES[event.key]
-                target_position = (coords[0] + x, coords[1]+y, coords[2]-1) #coords[2]-1 : a cube exists to stand on
+                x,y,z = MOVES[event.key]
+                target_position = (coords[0] + x, coords[1]+y, coords[2]-1+z) #coords[2]-1 : a cube exists to stand on
                 if target_position in grid.cube_dict:
                     coords[0]+=x
                     coords[1]+=y
-            elif event.key == pygame.K_SPACE:
-                if coords[2] < NUMBER_OF_LAYERS and (coords[0], coords[1], coords[2]) in grid.cube_dict:
-                    coords[2] += 1
-            elif event.key == pygame.K_LSHIFT:
-                if coords[2] > 1:
-                    coords[2] -= 1
+                    coords[2]+=z
+
 
             support = grid.cube_dict[coords[0], coords[1], coords[2] - 1]
             cube1.x = support.x

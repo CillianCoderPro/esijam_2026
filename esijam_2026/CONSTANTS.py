@@ -1,10 +1,14 @@
 import pygame
 
 # ------------------------------ Pygame ----------------------------------
+pygame.init()
+
 INITIAL_SCREEN_SIZE = (600,600)
 CAPTION = "esijam_2026"
 CLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode(INITIAL_SCREEN_SIZE, pygame.RESIZABLE)
+pygame.display.set_caption(CAPTION)
+
 
 # -------------------------------- CONROLS -------------------------------------------
 
@@ -13,8 +17,8 @@ MOVES = {
     pygame.K_s: (1, 0, 0),
     pygame.K_q: (0, -1, 0),
     pygame.K_d: (0, 1, 0),
-    pygame.K_SPACE: (0, 0, 1),
-    pygame.K_LALT: (0, 0, -1)
+    #pygame.K_SPACE: (0, 0, 1),
+    #pygame.K_LALT: (0, 0, -1)
 }
 
 #----------------------------------- World -------------------------------------------------

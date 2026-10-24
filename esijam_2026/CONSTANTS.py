@@ -5,12 +5,21 @@ INITIAL_SCREEN_SIZE = (600,600)
 CAPTION = "esijam_2026"
 CLOCK = pygame.time.Clock()
 
+MOVES = {
+    pygame.K_z: (-1, 0),
+    pygame.K_s: (1, 0),
+    pygame.K_q: (0, -1),
+    pygame.K_d: (0, 1),
+}
+
 CUBE_SIZE = 40
-NUMBER_OF_CUBES = 10
-NUMBER_OF_LAYERS = 1
-GAP_SIZE = 1# must be greater than 0
+NUMBER_OF_CUBES = 4
+NUMBER_OF_LAYERS = 4
+GAP_SIZE = 6# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1
 TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5
+
+#PLAYER_LAYER = 0
 
 """sprites"""
 WHITE_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/white_cube.png'), (CUBE_SIZE, CUBE_SIZE))

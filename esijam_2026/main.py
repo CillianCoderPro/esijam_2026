@@ -1,15 +1,11 @@
-from pygame import K_SPACE, K_PRINT
-
 from CONSTANTS import *
-from Cube import Cube
+from Cube import Cube, Player
 from Grid import Grid
 
 
 grid = Grid()
-player1 = Cube(0, 0, TOP_LAYER, RED_CUBE_IMAGE, 255)
-player1.z = CUBE_SIZE * 0.5
-player2 = Cube(NUMBER_OF_CUBES-1, NUMBER_OF_CUBES-1, TOP_LAYER, BLUE_CUBE_IMAGE, 255)
-player2.z = CUBE_SIZE * 0.5
+player1 = Player(0, 0, TOP_LAYER, RED_CUBE_IMAGE)
+player2 = Player(NUMBER_OF_CUBES-1, NUMBER_OF_CUBES-1, TOP_LAYER, BLUE_CUBE_IMAGE)
 
 list_of_players = [player1, player2]
 
@@ -29,7 +25,7 @@ MOVES = {
 SCREEN.fill((100, 150, 100))
 grid.draw(list_of_players)
 pygame.display.flip()
-pygame.time.wait(4000)
+pygame.time.wait(1000)
 
 while True:
     SCREEN.fill((100, 150, 100))

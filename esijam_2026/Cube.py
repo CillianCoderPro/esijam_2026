@@ -1,7 +1,7 @@
 from CONSTANTS import *
 
 class Cube:
-    def __init__(self, row=0, file=0, col = 0, image = WHITE_CUBE_IMAGE, transparency = 255):
+    def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE, transparency = 255):
         self.row = row
         self.file = file
         self.col = col
@@ -20,7 +20,13 @@ class Cube:
         screen_y = y_in_pixels + y_offset - layer_in_pixels - self.z
         return screen_x, screen_y
 
-
     def draw(self):
         self.image.set_alpha(self.transparency)
         SCREEN.blit(self.image, self.screen_position())
+
+
+
+class Player(Cube):
+    def __init__(self, row, file, col, image):
+        super().__init__(row, file, col, image)
+        self.z = CUBE_SIZE * 0.5

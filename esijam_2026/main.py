@@ -32,21 +32,18 @@ while True:
             for i, player in enumerate(list_of_players):
                 if event.key in PLAYER_CONFIGURATIONS[i]["moves"]:
                     d_row,d_file,d_col = PLAYER_CONFIGURATIONS[i]["moves"][event.key]
-                    target_position = (player.row + d_row, player.file + d_file, player.col + d_col)
-                    if target_position in grid.cube_dict:
-                        player.row, player.file, player.col = target_position
+                    player.move(d_row, d_file, d_col, grid)
 
 
     for player in list_of_players:
         try:
-            if grid.cube_dict[player.row, player.file, player.col].transparency <-20:
+            if grid.cube_dict[player.row, player.file, player.col].transparency <-100:
                     grid.cube_dict.pop((player.row, player.file, player.col))
                     player.col -= 1
             else:
                 grid.cube_dict[player.row, player.file, player.col].transparency -= 5
         except:
-            print(player.image, "LOSS")
-            break
+            player.state = "eliminated"
 
     pygame.display.flip()
     CLOCK.tick(60)

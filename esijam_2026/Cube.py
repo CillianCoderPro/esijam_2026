@@ -1,3 +1,5 @@
+from numpy.f2py.symbolic import eliminate_quotes
+
 from CONSTANTS import *
 
 class Cube:
@@ -30,3 +32,16 @@ class Player(Cube):
     def __init__(self, row, file, col, image):
         super().__init__(row, file, col, image)
         self.z = CUBE_SIZE * 0.5
+        self.state = "alive"
+
+    def move(self, d_row, d_file, d_col, grid):
+        if self.state == "eliminated":
+            return
+        target_position = (self.row + d_row, self.file + d_file, self.col + d_col)
+        if target_position in grid.cube_dict:
+            self.row, self.file, self.col = target_position
+
+    def draw(self):
+        if self.state == "eliminated":
+            return
+        SCREEN.blit(self.image, self.screen_position())

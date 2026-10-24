@@ -1,26 +1,25 @@
 from CONSTANTS import *
 
 class Cube:
-    def __init__(self, x_offset, y_offset, z_offset, row=0, file=0, col = 0, image = WHITE_CUBE_IMAGE):
+    def __init__(self, row=0, file=0, col = 0, image = WHITE_CUBE_IMAGE, transparency = 0):
         self.row = row
         self.file = file
         self.col = col
-        self.x = (file - self.row - 1) * CUBE_SIZE * 0.5 #isometric maths
-        self.y = (file + self.row) * CUBE_SIZE * 0.25 #isometric maths
-        self.x_offset = x_offset
-        self.y_offset = y_offset
-        self.z = z_offset
-        self.layer = self.col * GAP_SIZE
         self.image = image
-    """    
-    def drop(self):
-        if self.z > 0 + CUBE_SIZE * 0.5:
-            self.z -= 1
-            self.draw()
-        else:
-            grid.cube_dict[self.row, self.file, self.col + 1] = self
-            self = Cube(screen.get_width() / 2, (screen.get_height() - TOTAL_GRID_HEIGHT) / 2, 100,randint(0, NUMBER_OF_CUBES - 1), randint(0, NUMBER_OF_CUBES - 1),randint(0, NUMBER_OF_LAYERS - 1), BLUE_CUBE_IMAGE, )
-    """
+        self.transparency = transparency
+        self.z = 0
+
+    def screen_position(self):
+        x_offset = SCREEN.get_width() / 2
+        y_offset = (SCREEN.get_height() - TOTAL_GRID_HEIGHT) / 2
+        x_in_pixels = (self.file - self.row - 1) * CUBE_SIZE * 0.5 #(*0.5 : isometric maths)
+        y_in_pixels = (self.file + self.row) * CUBE_SIZE * 0.25 #(*0.25 : isometric maths)
+        layer_in_pixels = self.col * GAP_SIZE * CUBE_SIZE *0.5 #(*0.5 : isometric maths)
+
+        screen_x = x_in_pixels + x_offset
+        screen_y = y_in_pixels + y_offset - layer_in_pixels - self.z
+        return screen_x, screen_y
+
 
     def draw(self):
-        SCREEN.blit(self.image, (self.x + self.x_offset, self.y + self.y_offset - self.z - self.layer * CUBE_SIZE * 0.5))
+        SCREEN.blit(self.image, self.screen_position())

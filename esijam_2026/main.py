@@ -13,14 +13,14 @@ class Cube:
         self.row = row
         self.file = file
         self.col = col
-        self.x = (file - self.row - 1) * CUBE_SIZE * 0.5
-        self.y = (file + self.row) * CUBE_SIZE * 0.25
+        self.x = (file - self.row - 1) * CUBE_SIZE * 0.5 #isometric maths
+        self.y = (file + self.row) * CUBE_SIZE * 0.25 #isometric maths
         self.x_offset = x_offset
         self.y_offset = y_offset
         self.z = z_offset
         self.layer = self.col * GAP_SIZE
         self.image = image
-    """
+    """    
     def drop(self):
         if self.z > 0 + CUBE_SIZE * 0.5:
             self.z -= 1
@@ -50,14 +50,6 @@ class Map:
                         cube.draw()
                     if [row, file, col] == coords:
                         cube1.draw()
-        """
-        for coord, cube in self.cube_dict.items():
-            cube.x_offset = screen.get_width()/2
-            cube.y_offset = ( screen.get_height() - TOTAL_GRID_HEIGHT ) /2
-            cube.draw()
-        """
-
-
 
 
 #create_grid(NUMBER_OF_CUBES)
@@ -71,7 +63,6 @@ cube1 = Cube(screen.get_width()/2, (screen.get_height() - TOTAL_GRID_HEIGHT)/2, 
 while True:
     screen.fill((100, 150, 100))
     grid.draw()
-    #cube1.draw()
 
     #falling_cube.drop()
 

@@ -11,13 +11,13 @@ MOVES = {
     pygame.K_q: (0, -1, 0),
     pygame.K_d: (0, 1, 0),
     pygame.K_SPACE: (0, 0, 1),
-    pygame.K_LSHIFT: (0, 0, -1)
+    pygame.K_LALT: (0, 0, -1)
 }
 
 CUBE_SIZE = 40
-NUMBER_OF_CUBES = 4
+NUMBER_OF_CUBES = 5
 NUMBER_OF_LAYERS = 4
-GAP_SIZE = 6# must be greater than 0
+GAP_SIZE = 7# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1
 TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5
 

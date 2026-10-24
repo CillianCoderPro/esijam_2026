@@ -8,7 +8,7 @@ pygame.display.set_caption(CAPTION)
 
 grid = Grid()
 
-player = Cube(0,0,0, RED_CUBE_IMAGE)
+player = Cube(0,0,0, RED_CUBE_IMAGE, 255)
 player.z = CUBE_SIZE * 0.5
 
 

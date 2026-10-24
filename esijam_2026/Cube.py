@@ -1,12 +1,12 @@
 from CONSTANTS import *
 
 class Cube:
-    def __init__(self, row=0, file=0, col = 0, image = WHITE_CUBE_IMAGE, transparency = 0):
+    def __init__(self, row=0, file=0, col = 0, image = WHITE_CUBE_IMAGE, transparency = 255):
         self.row = row
         self.file = file
         self.col = col
         self.image = image
-        self.transparency = transparency
+        self.transparency = transparency # (0 = invisible, 255 = fully opaque)
         self.z = 0
 
     def screen_position(self):
@@ -22,4 +22,5 @@ class Cube:
 
 
     def draw(self):
+        self.image.set_alpha(self.transparency)
         SCREEN.blit(self.image, self.screen_position())

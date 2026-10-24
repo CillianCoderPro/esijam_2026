@@ -19,9 +19,9 @@ MOVES = {
 
 #----------------------------------- World -------------------------------------------------
 
-CUBE_SIZE = 40
-NUMBER_OF_CUBES = 8
-NUMBER_OF_LAYERS = 4
+CUBE_SIZE = 50
+NUMBER_OF_CUBES = 9
+NUMBER_OF_LAYERS = 3
 GAP_SIZE = 7# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1
 TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5

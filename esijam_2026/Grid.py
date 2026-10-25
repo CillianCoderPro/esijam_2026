@@ -1,5 +1,5 @@
 from CONSTANTS import *
-from Cube import Cube
+from Cube import GridCube
 
 class Grid:
     def __init__(self):
@@ -7,7 +7,7 @@ class Grid:
         for row in range(NUMBER_OF_CUBES):
             for file in range(NUMBER_OF_CUBES):
                 for col in range(NUMBER_OF_LAYERS):
-                    self.cube_dict[row, file, col] = Cube(row, file, col)
+                    self.cube_dict[row, file, col] = GridCube(row, file, col)
 
     def draw(self, list_of_players):
         for row in range(NUMBER_OF_CUBES):

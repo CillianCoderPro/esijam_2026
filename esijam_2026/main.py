@@ -1,5 +1,5 @@
 from CONSTANTS import *
-from Cube import Cube, Player
+from Cube import Player
 from Grid import Grid
 
 

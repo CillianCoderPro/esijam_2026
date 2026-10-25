@@ -33,6 +33,7 @@ BLACK_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/black_cube.p
 BROKEN_1_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_1.png'), (CUBE_SIZE, CUBE_SIZE))
 BROKEN_2_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_2.png'), (CUBE_SIZE, CUBE_SIZE))
 BROKEN_3_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_3.png'), (CUBE_SIZE, CUBE_SIZE))
+BLANK_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/blank_cube.png'), (CUBE_SIZE, CUBE_SIZE))
 
 
 GRID_CUBE_IMAGES = (
@@ -40,6 +41,7 @@ GRID_CUBE_IMAGES = (
     BROKEN_1_CUBE_IMAGE,
     BROKEN_2_CUBE_IMAGE,
     BROKEN_3_CUBE_IMAGE,
+    BLANK_CUBE_IMAGE,
 )
 NUMBER_OF_GRID_CUBE_IMAGES = len(GRID_CUBE_IMAGES)
 

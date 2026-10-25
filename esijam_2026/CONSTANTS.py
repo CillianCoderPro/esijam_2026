@@ -53,6 +53,7 @@ NUMBER_OF_GRID_CUBE_IMAGES = len(GRID_CUBE_IMAGES)
 PLAYER_CONFIGURATIONS = (
     {   "start": (0,0),
         "image": RED_CUBE_IMAGE,
+        "name": "Red Cube",
         "moves":{
                 pygame.K_z: (-1, 0, 0),
                 pygame.K_s: (1, 0, 0),
@@ -63,6 +64,7 @@ PLAYER_CONFIGURATIONS = (
 
     {   "start": (NUMBER_OF_CUBES-1,NUMBER_OF_CUBES-1),
         "image": BLUE_CUBE_IMAGE,
+        "name": "Blue Cube",
         "moves":{
                 pygame.K_UP: (-1, 0, 0),
                 pygame.K_DOWN: (1, 0, 0),
@@ -73,6 +75,7 @@ PLAYER_CONFIGURATIONS = (
 
     {   "start": (0,NUMBER_OF_CUBES-1),
         "image": YELLOW_CUBE_IMAGE,
+        "name": "Yellow Cube",
         "moves":{
                 pygame.K_i: (-1, 0, 0),
                 pygame.K_k: (1, 0, 0),
@@ -83,6 +86,7 @@ PLAYER_CONFIGURATIONS = (
 
     {   "start": (NUMBER_OF_CUBES-1, 0),
         "image": GREEN_CUBE_IMAGE,
+        "name": "Green Cube",
         "moves":{
                 pygame.K_t: (-1, 0, 0),
                 pygame.K_g: (1, 0, 0),

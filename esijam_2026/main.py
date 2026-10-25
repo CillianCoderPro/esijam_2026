@@ -1,36 +1,10 @@
-from CONSTANTS import *
-from Cube import Player
-from Grid import Grid
+from Scene import *
 
 
-grid = Grid()
-list_of_players = []
-
-for i in range(NUMBER_OF_PLAYERS):
-    row, file = PLAYER_CONFIGURATIONS[i]["start"]
-    image = PLAYER_CONFIGURATIONS[i]["image"]
-    player = Player(row, file, TOP_LAYER, image)
-    list_of_players.append(player)
-
-while True:
-    SCREEN.fill((100, 150, 100))
-    grid.draw(list_of_players)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-
-        elif event.type == pygame.KEYDOWN:
-            for i, player in enumerate(list_of_players):
-                if event.key in PLAYER_CONFIGURATIONS[i]["moves"]:
-                    d_row,d_file,d_col = PLAYER_CONFIGURATIONS[i]["moves"][event.key]
-                    player.move(d_row, d_file, d_col, grid, list_of_players)
-
-    for player in list_of_players:
-        player.update_state(grid)
-
-    pygame.display.flip()
-    CLOCK.tick(60)
+menu = MenuScene()
+game = GameScene()
+return_to_manu = ReturnToMenu()
+state_machine = StateMachine({"menu": menu, "game": game, "return_to_menu": return_to_manu}, "menu")
+state_machine.run()
 
 

@@ -55,11 +55,12 @@ class GridCube(Cube):
 
 
 class Player(Cube):
-    def __init__(self, row, file, col, image):
+    def __init__(self, row, file, col, image, player_name):
         super().__init__(row, file, col, image)
         self.z = CUBE_SIZE * 0.5
         self.state = "alive"
         self.current_cube = None
+        self.player_name = player_name
 
     def update_state(self, grid):
         if  self.state == "eliminated":

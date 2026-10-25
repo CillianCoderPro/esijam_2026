@@ -2,6 +2,10 @@ from CONSTANTS import *
 from Cube import Player
 from Grid import Grid
 
+### -------------------------------------- Parent Scene Class ------------------------------------------
+
+
+
 class Scene:
     def __init__(self):
         self.next_state = None
@@ -11,6 +15,12 @@ class Scene:
     def handle_event(self, event): pass
     def update(self): pass
     def draw(self, screen): pass
+
+
+### -------------------------------------- State Machine ------------------------------------------
+
+
+
 
 class StateMachine():
     def __init__(self, scene_dict, start_name):
@@ -42,6 +52,10 @@ class StateMachine():
             pygame.display.flip()
             CLOCK.tick(60)
 
+### --------------------------------------  Menu Screen ------------------------------------------
+
+
+
 class MenuScene(Scene):
     def __init__(self):
         super().__init__()
@@ -56,10 +70,20 @@ class MenuScene(Scene):
             elif event.key == pygame.K_3:
                 self.next_state = "game"
                 self.next_data = {"number_of_players": 3}
+            elif event.key == pygame.K_4:
+                self.next_state = "game"
+                self.next_data = {"number_of_players": 4}
 
     def draw(self, screen):
         screen.fill((200,100,100))
         screen.blit(TEXT, (screen.get_width()//2, screen.get_height()//2))
+
+
+
+### -------------------------------------- Main Game Screen ------------------------------------------
+
+
+
 
 class GameScene(Scene):
     def __init__(self):
@@ -72,8 +96,10 @@ class GameScene(Scene):
         for i in range(self.number_of_players):
             row, file = PLAYER_CONFIGURATIONS[i]["start"]
             image = PLAYER_CONFIGURATIONS[i]["image"]
-            player = Player(row, file, TOP_LAYER, image)
+            name = PLAYER_CONFIGURATIONS[i]["name"]
+            player = Player(row, file, TOP_LAYER, image, name)
             self.list_of_players.append(player)
+        self.list_of_alive_players = self.list_of_players
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
@@ -87,6 +113,11 @@ class GameScene(Scene):
     def update(self):
         for player in self.list_of_players:
             player.update_state(self.grid)
+            if player.state == "eliminated":
+                self.list_of_alive_players.remove(player)
+            if len(self.list_of_alive_players) == 1:
+                print(f"{self.list_of_players[0].player_name} wins")
+                self.next_state = "return_to_menu"
 
     def draw(self, screen):
         SCREEN.fill((100, 150, 100))
@@ -95,10 +126,22 @@ class GameScene(Scene):
 
 
 
+### -------------------------------------- Return To Menu Screen ------------------------------------------
 
 
-menu = MenuScene()
-game = GameScene()
-state_machine = StateMachine({"menu": menu, "game": game}, "menu")
-state_machine.run()
+class ReturnToMenu(Scene):
+    def __init__(self):
+        super().__init__()
+
+    def handle_event(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                self.next_state = "quit"
+            elif event.key == pygame.K_SPACE:
+                self.next_state = "menu"
+
+    def draw(self, screen):
+        screen.fill((100,100,100))
+        text = FONT.render('press space to return to menu', True, (0,0,0))
+        screen.blit(text, (screen.get_width(), screen.get_height()//2))
 

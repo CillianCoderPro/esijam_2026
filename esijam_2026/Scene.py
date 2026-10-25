@@ -1,7 +1,6 @@
-import pygame
-
 from CONSTANTS import *
-
+from Cube import Player
+from Grid import Grid
 
 class Scene:
     def __init__(self):
@@ -51,16 +50,30 @@ class MenuScene(Scene):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self.next_state = "quit"
+            elif event.key == pygame.K_2:
+                self.next_state = "game"
+                self.next_data = {"number_of_players":2}
+            elif event.key == pygame.K_3:
+                self.next_state = "game"
+                self.next_data = {"number_of_players": 3}
+
     def draw(self, screen):
         screen.fill((200,100,100))
         screen.blit(TEXT, (screen.get_width()//2, screen.get_height()//2))
 
 class GameScene(Scene):
-    def __init__(self, number_of_players, list_of_players, grid):
+    def __init__(self):
         super().__init__()
-        self.number_of_players = number_of_players
-        self.list_of_players = list_of_players
-        self.grid = grid
+
+    def on_enter(self, data):
+        self.number_of_players = data["number_of_players"]
+        self.list_of_players = []
+        self.grid = Grid()
+        for i in range(self.number_of_players):
+            row, file = PLAYER_CONFIGURATIONS[i]["start"]
+            image = PLAYER_CONFIGURATIONS[i]["image"]
+            player = Player(row, file, TOP_LAYER, image)
+            self.list_of_players.append(player)
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
@@ -77,28 +90,15 @@ class GameScene(Scene):
 
     def draw(self, screen):
         SCREEN.fill((100, 150, 100))
-        grid.draw(list_of_players)
+        self.grid.draw(self.list_of_players)
 
 
 
 
-from Cube import Player
-from Grid import Grid
-
-grid = Grid()
-list_of_players = []
-
-for i in range(NUMBER_OF_PLAYERS):
-    row, file = PLAYER_CONFIGURATIONS[i]["start"]
-    image = PLAYER_CONFIGURATIONS[i]["image"]
-    player = Player(row, file, TOP_LAYER, image)
-    list_of_players.append(player)
 
 
 menu = MenuScene()
-game = GameScene(NUMBER_OF_CUBES, list_of_players, grid)
-state_machine = StateMachine({"menu": menu, "game": game}, "game")
+game = GameScene()
+state_machine = StateMachine({"menu": menu, "game": game}, "menu")
 state_machine.run()
 
-from Cube import Player
-from Grid import Grid

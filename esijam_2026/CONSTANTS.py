@@ -9,9 +9,8 @@ CAPTION = "esijam_2026"
 CLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode(INITIAL_SCREEN_SIZE, pygame.RESIZABLE)
 pygame.display.set_caption(CAPTION)
-FONT = pygame.font.Font(None, 40)
-
-TEXT = FONT.render('press 2 for players', True, (0,0,0))
+FONT = pygame.font.Font(None, 20)
+TEXT = FONT.render('press 2 for 2 players - press 3 for 3 players', True, (0,0,0))
 
 
 #----------------------------------- World -------------------------------------------------

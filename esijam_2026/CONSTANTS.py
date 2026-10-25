@@ -19,7 +19,7 @@ GAP_SIZE = 7# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1
 TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5
 
-
+FRAMES_BEFORE_CUBE_BREAKS = 24
 
 
 #--------------------------------------- SPRITES --------------------------------------------
@@ -30,6 +30,18 @@ BLUE_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/blue_cube.png
 YELLOW_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/yellow_cube.png'), (CUBE_SIZE, CUBE_SIZE))
 GREEN_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/green_cube.png'), (CUBE_SIZE, CUBE_SIZE))
 BLACK_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/black_cube.png'), (CUBE_SIZE, CUBE_SIZE))
+BROKEN_1_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_1.png'), (CUBE_SIZE, CUBE_SIZE))
+BROKEN_2_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_2.png'), (CUBE_SIZE, CUBE_SIZE))
+BROKEN_3_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_3.png'), (CUBE_SIZE, CUBE_SIZE))
+
+
+GRID_CUBE_IMAGES = (
+    WHITE_CUBE_IMAGE,
+    BROKEN_1_CUBE_IMAGE,
+    BROKEN_2_CUBE_IMAGE,
+    BROKEN_3_CUBE_IMAGE,
+)
+NUMBER_OF_GRID_CUBE_IMAGES = len(GRID_CUBE_IMAGES)
 
 # -------------------------------- PLAYER SETTINGS -------------------------------------------
 

@@ -64,19 +64,22 @@ class MenuScene(Scene):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self.next_state = "quit"
-            elif event.key == pygame.K_2:
-                self.next_state = "game"
-                self.next_data = {"number_of_players":2}
-            elif event.key == pygame.K_3:
-                self.next_state = "game"
-                self.next_data = {"number_of_players": 3}
-            elif event.key == pygame.K_4:
-                self.next_state = "game"
-                self.next_data = {"number_of_players": 4}
+        if BUTTON1.clicked(event):
+            self.next_state = "game"
+            self.next_data = {"number_of_players":2}
+        if BUTTON2.clicked(event):
+            self.next_state = "game"
+            self.next_data = {"number_of_players":3}
+        if BUTTON3.clicked(event):
+            self.next_state = "game"
+            self.next_data = {"number_of_players":4}
 
     def draw(self, screen):
         screen.fill((200,100,100))
-        screen.blit(TEXT, (screen.get_width()//2, screen.get_height()//2))
+        BUTTON1.draw()
+        BUTTON2.draw()
+        BUTTON3.draw()
+        BUTTON4.draw()
 
 
 
@@ -132,16 +135,15 @@ class GameScene(Scene):
 class ReturnToMenu(Scene):
     def __init__(self):
         super().__init__()
+        self.back_home_button = Button(0, 0, 200, 120, SCREEN, "Back to Home")
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self.next_state = "quit"
-            elif event.key == pygame.K_SPACE:
-                self.next_state = "menu"
+        if self.back_home_button.clicked(event):
+            self.next_state = "menu"
 
     def draw(self, screen):
-        screen.fill((100,100,100))
-        text = FONT.render('press space to return to menu', True, (0,0,0))
-        screen.blit(text, (screen.get_width(), screen.get_height()//2))
+        self.back_home_button.draw()
 

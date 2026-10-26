@@ -1,5 +1,5 @@
 import pygame
-
+from Button import Button
 
 # ------------------------------ Pygame ----------------------------------
 pygame.init()
@@ -97,6 +97,18 @@ PLAYER_CONFIGURATIONS = (
 )
 
 NUMBER_OF_PLAYERS = 4
+
+
+# -------------------------------- PLAYER SETTINGS -------------------------------------------
+
+
+# Home Screen Buttons:
+
+BUTTON1 = Button(0,-150, 100, 60, SCREEN, "2 players")
+BUTTON2 = Button(0,-50, 100, 60, SCREEN, "3 players")
+BUTTON3 = Button(0,50, 100, 60, SCREEN, "4 players")
+BUTTON4 = Button(0,150, 100, 60, SCREEN, "Settings")
+
 
 
 

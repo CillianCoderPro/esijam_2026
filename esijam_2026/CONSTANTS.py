@@ -24,7 +24,7 @@ TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) *
 
 FRAMES_BEFORE_CUBE_BREAKS = 24
 
-GRAVITY = 2 #pixels fallen per frame
+GRAVITY = 1 #pixels fallen per frame
 
 
 #--------------------------------------- SPRITES --------------------------------------------

@@ -12,7 +12,6 @@ state_machine.run()
 TO DO:
 
 - Fix UI: upgrade buttons
-- Falling animation for players
 - Enemy AI
 - Sounds
 

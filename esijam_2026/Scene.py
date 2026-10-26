@@ -117,6 +117,7 @@ class GameScene(Scene):
             name = PLAYER_CONFIGURATIONS[i]["name"]
             bot = Player(row, file, TOP_LAYER, image, name)
             self.list_of_bots.append(bot)
+        BACKROUND_MUSIC.play(-1)
 
     def all_players(self):
         return self.list_of_players + self.list_of_bots

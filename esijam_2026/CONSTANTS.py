@@ -116,7 +116,23 @@ BUTTON4 = Button(0,150, 100, 60, SCREEN, "Quit")
 
 
 
+# -------------------------------- BOT SETTINGS -------------------------------------------
+
+
 BOT_MOVE_INTERVAL = 20 #frames between bot decisions (60 frames = 1 second)
 
+
+
+
+# -------------------------------- SOUND -------------------------------------------
+
+
+
+pygame.mixer.init()
+BREAK_SOUND = pygame.mixer.Sound("sounds/break.mp3")
+BREAK_SOUND.set_volume(1)
+POP_SOUND = pygame.mixer.Sound("sounds/pop.mp3")
+BACKROUND_MUSIC = pygame.mixer.Sound("sounds/music1.mp3")
+BACKROUND_MUSIC.set_volume(0.1)
 
 

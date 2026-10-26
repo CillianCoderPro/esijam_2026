@@ -99,14 +99,15 @@ class Player(Cube):
             return
 
         immediate_current_cube = grid.cube_dict.get((self.row, self.file, self.col))
-        if not immediate_current_cube:
+        """if not immediate_current_cube:
             self.state = "eliminated"
-            return
+            return"""
         if immediate_current_cube != self.current_cube: #if player has just arrived at a new cube
             self.current_cube = immediate_current_cube
             self.current_cube.step_on()
         elif self.current_cube.is_broken(): #if cube has just been broken
             grid.cube_dict.pop((self.row, self.file, self.col))
+            BREAK_SOUND.play()
             self.state = "falling"
         else:
             self.current_cube.update_broken_state()

@@ -122,7 +122,8 @@ class GameScene(Scene):
                 self.list_of_alive_players.remove(player)
             if len(self.list_of_alive_players) == 1:
                 print(f"{self.list_of_players[0].player_name} wins")
-                self.next_state = "return_to_menu"
+                self.next_state = "back_to_menu"
+                self.next_data = {"winner": self.list_of_players[0].player_name}
 
     def draw(self, screen):
         SCREEN.fill((100, 150, 100))
@@ -131,13 +132,17 @@ class GameScene(Scene):
 
 
 
-### -------------------------------------- Return To Menu Screen ------------------------------------------
+### -------------------------------------- Back To Menu Screen ------------------------------------------
 
 
-class ReturnToMenu(Scene):
+class BackToMenu(Scene):
     def __init__(self):
         super().__init__()
         self.back_home_button = Button(0, 0, 200, 120, SCREEN, "Back to Home")
+
+    def on_enter(self, data):
+        self.winner = data["winner"]
+        self.back_home_button = Button(0, 0, 200, 120, SCREEN, f"{self.winner} wins - Back To Home")
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:

@@ -3,8 +3,8 @@ from Scene import *
 
 menu = MenuScene()
 game = GameScene()
-return_to_manu = BackToMenu()
-state_machine = StateMachine({"menu": menu, "game": game, "back_to_menu": return_to_manu}, "menu")
+back_to_menu = BackToMenu()
+state_machine = StateMachine({"menu": menu, "game": game, "back_to_menu": back_to_menu}, "menu")
 state_machine.run()
 
 

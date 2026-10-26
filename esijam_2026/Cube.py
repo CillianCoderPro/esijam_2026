@@ -44,7 +44,7 @@ class GridCube(Cube):
     def update_broken_state(self):
         """Called every frame while the player is on this cube"""
         self.frame_timer += 1
-        if self.frame_timer >= FRAMES_BEFORE_CUBE_BREAKS:
+        if self.frame_timer == FRAMES_BEFORE_CUBE_BREAKS:
             self.frame_timer = 0
             if self.broken_state_number < NUMBER_OF_GRID_CUBE_IMAGES-1:
                 self.broken_state_number += 1
@@ -52,7 +52,8 @@ class GridCube(Cube):
                 self.broken = True
         self.image = GRID_CUBE_IMAGES[self.broken_state_number]
 
-    def is_broken(self): return self.broken
+    def is_broken(self):
+        return self.broken
 
 
 class Player(Cube):
@@ -62,23 +63,51 @@ class Player(Cube):
         self.state = "alive"
         self.current_cube = None
         self.player_name = player_name
+        self.distance_fallen = 0
+        self.velocity = 0
+
+    def update_falling_state(self, cube_below, number_of_layer_drops):
+        if self.state != "falling":
+            return
+        pixels_between_layers = GAP_SIZE * CUBE_SIZE * 0.5 *  number_of_layer_drops # pixels between layers
+        self.velocity += GRAVITY
+        self.distance_fallen += self.velocity
+        if self.distance_fallen >= pixels_between_layers and cube_below:
+            self.distance_fallen = 0
+            self.velocity = 0
+            self.state = "alive"
+            self.z = CUBE_SIZE * 0.5
+            self.col -= number_of_layer_drops
+        else:
+            self.z = CUBE_SIZE * 0.5 - self.distance_fallen
 
     def update_state(self, grid):
         if  self.state == "eliminated":
             return
+        if self.state == "falling":
+            for i in range(1, NUMBER_OF_LAYERS+1):
+                cube_below = grid.cube_dict.get((self.row, self.file, self.col - i))
+                if cube_below:
+                    self.update_falling_state(cube_below, i)
+                    break
+            else: # if there is no layer to fall to
+                self.velocity += GRAVITY
+                self.distance_fallen += self.velocity
+                self.z = CUBE_SIZE * 0.5 - self.distance_fallen
+                if self.distance_fallen >= SCREEN.get_height():
+                    self.state = "eliminated"
+            return
 
         immediate_current_cube = grid.cube_dict.get((self.row, self.file, self.col))
-
         if not immediate_current_cube:
             self.state = "eliminated"
             return
-
         if immediate_current_cube != self.current_cube: #if player has just arrived at a new cube
             self.current_cube = immediate_current_cube
             self.current_cube.step_on()
-        elif self.current_cube.is_broken():
+        elif self.current_cube.is_broken(): #if cube has just been broken
             grid.cube_dict.pop((self.row, self.file, self.col))
-            self.col -= 1
+            self.state = "falling"
         else:
             self.current_cube.update_broken_state()
 

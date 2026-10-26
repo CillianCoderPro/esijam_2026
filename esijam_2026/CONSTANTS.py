@@ -107,11 +107,16 @@ NUMBER_OF_PLAYERS = 4
 
 # Home Screen Buttons:
 
+BUTTON_AI = Button(0,-250, 100, 60, SCREEN, "Play vs AI")
 BUTTON1 = Button(0,-150, 100, 60, SCREEN, "2 players")
 BUTTON2 = Button(0,-50, 100, 60, SCREEN, "3 players")
 BUTTON3 = Button(0,50, 100, 60, SCREEN, "4 players")
 BUTTON4 = Button(0,150, 100, 60, SCREEN, "Quit")
 
+
+
+
+BOT_MOVE_INTERVAL = 20 #frames between bot decisions (60 frames = 1 second)
 
 
 

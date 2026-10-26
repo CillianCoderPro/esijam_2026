@@ -5,7 +5,7 @@ from Button import Button
 pygame.init()
 
 INITIAL_SCREEN_SIZE = (600,600)
-CAPTION = "esijam_2026"
+CAPTION = " 'Esi'metric Spleef"
 CLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode(INITIAL_SCREEN_SIZE, pygame.RESIZABLE)
 pygame.display.set_caption(CAPTION)
@@ -37,6 +37,7 @@ BROKEN_1_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cu
 BROKEN_2_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_2.png'), (CUBE_SIZE, CUBE_SIZE))
 BROKEN_3_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cube_3.png'), (CUBE_SIZE, CUBE_SIZE))
 BLANK_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/blank_cube.png'), (CUBE_SIZE, CUBE_SIZE))
+FULL_WHITE_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/full_white_cube.png'), (CUBE_SIZE, CUBE_SIZE))
 
 
 GRID_CUBE_IMAGES = (
@@ -107,7 +108,7 @@ NUMBER_OF_PLAYERS = 4
 BUTTON1 = Button(0,-150, 100, 60, SCREEN, "2 players")
 BUTTON2 = Button(0,-50, 100, 60, SCREEN, "3 players")
 BUTTON3 = Button(0,50, 100, 60, SCREEN, "4 players")
-BUTTON4 = Button(0,150, 100, 60, SCREEN, "Settings")
+BUTTON4 = Button(0,150, 100, 60, SCREEN, "Quit")
 
 
 

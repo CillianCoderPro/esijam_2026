@@ -1,11 +1,12 @@
 from CONSTANTS import *
 
 class Cube:
-    def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE):
+    def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE, transparency = 255):
         self.row = row
         self.file = file
         self.col = col
         self.image = image
+        self.transparency = transparency # (0 = invisible, 255 = fully opaque)
 
     def screen_position(self):
         x_offset = SCREEN.get_width() / 2
@@ -19,13 +20,13 @@ class Cube:
         return screen_x, screen_y
 
     def draw(self):
+        self.image.set_alpha(self.transparency)
         SCREEN.blit(self.image, self.screen_position())
 
 
 class GridCube(Cube):
-    def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE):
-        super().__init__(row, file, col, image)
-        #self.transparency = 255
+    def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE, transparency = 255):
+        super().__init__(row, file, col, image, transparency)
         self.z = 0
         self.broken_state_number = 0
         self.frame_timer = 0

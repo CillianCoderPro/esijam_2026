@@ -73,9 +73,11 @@ class MenuScene(Scene):
         if BUTTON3.clicked(event):
             self.next_state = "game"
             self.next_data = {"number_of_players":4}
+        if BUTTON4.clicked(event):
+            self.next_state = "quit"
 
     def draw(self, screen):
-        screen.fill((200,100,100))
+        screen.fill((100,200,100))
         BUTTON1.draw()
         BUTTON2.draw()
         BUTTON3.draw()

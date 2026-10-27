@@ -41,18 +41,18 @@ class Button:
             return True
 
     def draw(self):
-        button_square = pygame.Surface((self.width, self.height))
-        hover_square = pygame.Surface((self.width, self.height))
         if self.mouse_hover():
+            pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+            hover_square = pygame.Surface((self.width, self.height))
             button_square = pygame.Surface((self.width - 6, self.height - 6))
-            button_square.fill((200,200,200))
+            button_square.fill((230,210,210))
             hover_square.fill((0,0,0))
             self.screen.blit(hover_square, (self.screen_x(), self.screen_y()))
             self.screen.blit(button_square, (self.screen_x() + 3, self.screen_y() + 3))
-            self.screen.blit(self.text, (self.text_screen_x(), self.text_screen_y()))
         else:
+            button_square = pygame.Surface((self.width, self.height))
             button_square.fill((self.colour))
             self.screen.blit(button_square, (self.screen_x(), self.screen_y()))
-            self.screen.blit(self.text, (self.text_screen_x(), self.text_screen_y()))
+        self.screen.blit(self.text, (self.text_screen_x(), self.text_screen_y()))
 
 

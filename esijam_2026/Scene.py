@@ -60,6 +60,9 @@ class MenuScene(Scene):
     def __init__(self):
         super().__init__()
 
+    def on_enter(self, data):
+        pygame.mouse.set_visible(1)
+
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
@@ -81,6 +84,7 @@ class MenuScene(Scene):
 
     def draw(self, screen):
         screen.fill(BACKROUND_COLOUR)
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
         BUTTON_AI.draw()
         BUTTON1.draw()
         BUTTON2.draw()
@@ -99,6 +103,7 @@ class GameScene(Scene):
         super().__init__()
 
     def on_enter(self, data):
+        pygame.mouse.set_visible(0)
         self.number_of_players = data["number_of_players"]
         self.number_of_bots = data["number_of_bots"]
         self.list_of_players = []
@@ -163,6 +168,7 @@ class BackToMenu(Scene):
         super().__init__()
 
     def on_enter(self, data):
+        pygame.mouse.set_visible(1)
         self.winner = data["winner"]
         self.back_home_button = Button(0, 0, 900, 120, SCREEN, FONT, f"{self.winner} wins - Back To Home")
 

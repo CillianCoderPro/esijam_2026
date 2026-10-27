@@ -41,12 +41,16 @@ BROKEN_3_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/broken_cu
 BLANK_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/blank_cube.png'), (CUBE_SIZE, CUBE_SIZE))
 FULL_WHITE_CUBE_IMAGE = pygame.transform.scale(pygame.image.load('images/full_white_cube.png'), (CUBE_SIZE, CUBE_SIZE))
 
+GREY_CUBE_1_IMAGE = pygame.transform.scale(pygame.image.load('images/grey_cube_1.png'), (CUBE_SIZE, CUBE_SIZE))
+GREY_CUBE_2_IMAGE = pygame.transform.scale(pygame.image.load('images/grey_cube_2.png'), (CUBE_SIZE, CUBE_SIZE))
+GREY_CUBE_3_IMAGE = pygame.transform.scale(pygame.image.load('images/grey_cube_3.png'), (CUBE_SIZE, CUBE_SIZE))
+
 
 GRID_CUBE_IMAGES = (
     WHITE_CUBE_IMAGE,
-    BROKEN_1_CUBE_IMAGE,
-    BROKEN_2_CUBE_IMAGE,
-    BROKEN_3_CUBE_IMAGE,
+    GREY_CUBE_1_IMAGE,
+    GREY_CUBE_2_IMAGE,
+    GREY_CUBE_3_IMAGE,
     BLANK_CUBE_IMAGE,
 )
 NUMBER_OF_GRID_CUBE_IMAGES = len(GRID_CUBE_IMAGES)
@@ -109,7 +113,7 @@ VALID_BOT_MOVES = ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1))
 # -------------------------------- BOT SETTINGS -------------------------------------------
 
 
-BOT_MOVE_INTERVAL = 20 #frames between bot decisions (60 frames = 1 second)
+BOT_MOVE_INTERVAL = 10 #frames between bot decisions (60 frames = 1 second)
 
 
 

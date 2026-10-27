@@ -53,7 +53,7 @@ class GridCube(Cube):
                 self.broken_state_number += 1
             else:
                 self.broken = True
-                BREAK_SOUND.play()
+                #BREAK_SOUND.play()
         self.image = GRID_CUBE_IMAGES[self.broken_state_number]
 
     def is_broken(self):
@@ -110,7 +110,7 @@ class Player(Cube):
             self.current_cube = immediate_current_cube
             self.current_cube.step_on()
         elif self.current_cube.is_broken(): #if cube has just been broken
-            #BREAK_SOUND.play()
+            BREAK_SOUND.play()
             grid.cube_dict.pop((self.row, self.file, self.col))
             self.state = "falling"
         else:

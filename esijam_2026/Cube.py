@@ -1,4 +1,6 @@
 from CONSTANTS import *
+import bots.random_square_bot
+import bots.strongest_closest_square_bot
 
 class Cube:
     def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE, transparency = 255):
@@ -37,8 +39,9 @@ class GridCube(Cube):
         if self.broken_state_number == NUMBER_OF_GRID_CUBE_IMAGES-1:
             self.broken = True
         else:
-            self.broken_state_number = self.broken_state_number+1
+            self.broken_state_number += 1
             self.frame_timer = 0
+        #if self.frame_timer > 1:
         self.image = GRID_CUBE_IMAGES[self.broken_state_number]
 
     def update_broken_state(self):
@@ -50,6 +53,7 @@ class GridCube(Cube):
                 self.broken_state_number += 1
             else:
                 self.broken = True
+                BREAK_SOUND.play()
         self.image = GRID_CUBE_IMAGES[self.broken_state_number]
 
     def is_broken(self):
@@ -106,8 +110,8 @@ class Player(Cube):
             self.current_cube = immediate_current_cube
             self.current_cube.step_on()
         elif self.current_cube.is_broken(): #if cube has just been broken
+            #BREAK_SOUND.play()
             grid.cube_dict.pop((self.row, self.file, self.col))
-            BREAK_SOUND.play()
             self.state = "falling"
         else:
             self.current_cube.update_broken_state()
@@ -128,12 +132,14 @@ class Player(Cube):
             return
         SCREEN.blit(self.image, self.screen_position())
 
+    """
     # ----------- Bot Players ----------
 
     def bot_turn(self, grid, list_of_players):
         if self.state != "alive":
             return
 
+        #---- Basic Bot Logic ----
         candidates = []
         for d_row, d_file in ((-1, 0), (1, 0), (0, -1), (0, 1)):
             pos = (self.row + d_row, self.file + d_file, self.col)
@@ -148,8 +154,37 @@ class Player(Cube):
             if cube.broken_state_number <= strongest_cube.broken_state_number:
                 strongest_cube = cube
         movement_coords = (strongest_cube.row - self.row, strongest_cube.file - self.file, strongest_cube.col -self.col)
-        self.move(movement_coords[0], movement_coords[1], movement_coords[2], grid, list_of_players)
+        #---- ---- ----
 
+        self.move(movement_coords[0], movement_coords[1], movement_coords[2], grid, list_of_players)
+        """
+
+    def bot_turn_2(self, grid, list_of_players):
+        """
+        :param self: type player/cube object
+        :param grid: type grid object
+        :param list_of_players: list of players
+        :return:
+        """
+        if self.state != "alive":
+            return
+
+        dict_of_damage_values = {(coordinates): cube.broken_state_number for coordinates, cube in grid.cube_dict.items()}
+        my_position = (self.row, self.file, self.col)
+        others_positions = tuple((player.row, player.file, player.col) for player in list_of_players if player is not self)
+
+        move = (0, 0)  # default: stay put
+        try:
+            result = bots.strongest_closest_square_bot.choose_move(my_position, dict_of_damage_values, others_positions)
+            if result in VALID_BOT_MOVES:
+                move = result
+            else:
+                print(f"{self.player_name} returned an invalid move: {result!r}")
+        except Exception as error:
+            print(f"{self.player_name} crashed: {error!r}")
+
+        d_row, d_file = move
+        self.move(d_row, d_file, 0, grid, list_of_players)
 
 
 

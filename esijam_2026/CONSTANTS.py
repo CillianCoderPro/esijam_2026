@@ -15,10 +15,10 @@ TEXT = FONT.render('press 2 for 2 players - press 3 for 3 players', True, (0,0,0
 
 #----------------------------------- World -------------------------------------------------
 
-CUBE_SIZE = 50
-NUMBER_OF_CUBES = 9
-NUMBER_OF_LAYERS = 3
-GAP_SIZE = 7# must be greater than 0
+CUBE_SIZE = 40
+NUMBER_OF_CUBES = 7
+NUMBER_OF_LAYERS = 4
+GAP_SIZE = 9# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1
 TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5
 
@@ -47,7 +47,7 @@ GRID_CUBE_IMAGES = (
     BROKEN_1_CUBE_IMAGE,
     BROKEN_2_CUBE_IMAGE,
     BROKEN_3_CUBE_IMAGE,
-    #BLANK_CUBE_IMAGE,
+    BLANK_CUBE_IMAGE,
 )
 NUMBER_OF_GRID_CUBE_IMAGES = len(GRID_CUBE_IMAGES)
 
@@ -101,6 +101,7 @@ PLAYER_CONFIGURATIONS = (
 
 NUMBER_OF_PLAYERS = 4
 
+VALID_BOT_MOVES = ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1))
 
 # -------------------------------- PLAYER SETTINGS -------------------------------------------
 

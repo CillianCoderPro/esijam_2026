@@ -137,12 +137,15 @@ class GameScene(Scene):
         self.frame +=1
         if self.frame % BOT_MOVE_INTERVAL == 0: # delay between bot decisions
             for bot in self.list_of_bots:
-                bot.bot_turn(self.grid, self.all_players())
+                bot.bot_turn_2(self.grid, self.all_players())
         list_of_alive_players = [player for player in self.all_players() if player.state != "eliminated"]
-        if len(list_of_alive_players) == 1:
-            print(f"{list_of_alive_players[0].player_name} wins")
+        if len(list_of_alive_players) <= 1:
+            if list_of_alive_players:
+                self.next_data = {"winner": list_of_alive_players[0].player_name}
+            else:
+                self.next_data = {"winner": "Nobody"}
             self.next_state = "back_to_menu"
-            self.next_data = {"winner": list_of_alive_players[0].player_name}
+            BACKROUND_MUSIC.stop()
 
     def draw(self, screen):
         SCREEN.fill((100, 150, 100))

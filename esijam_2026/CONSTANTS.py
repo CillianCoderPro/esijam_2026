@@ -9,22 +9,22 @@ CAPTION = " 'Esi'metric Spleef"
 CLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode(INITIAL_SCREEN_SIZE, pygame.RESIZABLE)
 pygame.display.set_caption(CAPTION)
-FONT = pygame.font.Font(None, 20)
-TEXT = FONT.render('press 2 for 2 players - press 3 for 3 players', True, (0,0,0))
-
 
 #----------------------------------- World -------------------------------------------------
 
-CUBE_SIZE = 40
-NUMBER_OF_CUBES = 7
-NUMBER_OF_LAYERS = 4
-GAP_SIZE = 9# must be greater than 0
+CUBE_SIZE = 35
+NUMBER_OF_CUBES = 13
+NUMBER_OF_LAYERS = 3
+GAP_SIZE = 15# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1
 TOTAL_GRID_HEIGHT = CUBE_SIZE * NUMBER_OF_CUBES * 0.5 - (NUMBER_OF_LAYERS - 1) * GAP_SIZE * CUBE_SIZE * 0.5
 
 FRAMES_BEFORE_CUBE_BREAKS = 24
 
 GRAVITY = 1 #pixels fallen per frame
+
+
+BACKROUND_COLOUR = (100, 150, 100)
 
 
 #--------------------------------------- SPRITES --------------------------------------------
@@ -103,17 +103,6 @@ NUMBER_OF_PLAYERS = 4
 
 VALID_BOT_MOVES = ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1))
 
-# -------------------------------- PLAYER SETTINGS -------------------------------------------
-
-
-# Home Screen Buttons:
-
-BUTTON_AI = Button(0,-250, 100, 60, SCREEN, "Play vs AI")
-BUTTON1 = Button(0,-150, 100, 60, SCREEN, "2 players")
-BUTTON2 = Button(0,-50, 100, 60, SCREEN, "3 players")
-BUTTON3 = Button(0,50, 100, 60, SCREEN, "4 players")
-BUTTON4 = Button(0,150, 100, 60, SCREEN, "Quit")
-
 
 
 
@@ -137,3 +126,19 @@ BACKROUND_MUSIC = pygame.mixer.Sound("sounds/music1.mp3")
 BACKROUND_MUSIC.set_volume(0.1)
 
 
+
+# ------------------------------------ FONTS + TEXT + BUTTONS ---------------------------------
+
+#FONT = pygame.font.Font(None, 20)
+FONT_PATH = "PressStart2P-Regular.ttf"
+FONT_SIZE = 24
+FONT = pygame.font.Font(FONT_PATH, FONT_SIZE)
+
+
+# Home Screen Buttons:
+
+BUTTON_AI = Button(0,-250, 300, 60, SCREEN, FONT, "Play vs AI")
+BUTTON1 = Button(0,-150, 300, 60, SCREEN, FONT,"2 players")
+BUTTON2 = Button(0,-50, 300, 60, SCREEN, FONT,"3 players")
+BUTTON3 = Button(0,50, 300, 60, SCREEN, FONT,"4 players")
+BUTTON4 = Button(0,150, 300, 60, SCREEN, FONT,"Quit")

@@ -80,7 +80,7 @@ class MenuScene(Scene):
             self.next_state = "quit"
 
     def draw(self, screen):
-        screen.fill((100,200,100))
+        screen.fill(BACKROUND_COLOUR)
         BUTTON_AI.draw()
         BUTTON1.draw()
         BUTTON2.draw()
@@ -125,7 +125,8 @@ class GameScene(Scene):
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                self.next_state = "quit"
+                self.next_state = "menu"
+                BACKROUND_MUSIC.stop()
             for i, player in enumerate(self.list_of_players):
                 if event.key in PLAYER_CONFIGURATIONS[i]["moves"]:
                     d_row,d_file,d_col = PLAYER_CONFIGURATIONS[i]["moves"][event.key]
@@ -148,7 +149,7 @@ class GameScene(Scene):
             BACKROUND_MUSIC.stop()
 
     def draw(self, screen):
-        SCREEN.fill((100, 150, 100))
+        SCREEN.fill(BACKROUND_COLOUR)
         self.grid.draw(self.all_players())
 
 
@@ -160,11 +161,10 @@ class GameScene(Scene):
 class BackToMenu(Scene):
     def __init__(self):
         super().__init__()
-        self.back_home_button = Button(0, 0, 200, 120, SCREEN, "Back to Home")
 
     def on_enter(self, data):
         self.winner = data["winner"]
-        self.back_home_button = Button(0, 0, 200, 120, SCREEN, f"{self.winner} wins - Back To Home")
+        self.back_home_button = Button(0, 0, 900, 120, SCREEN, FONT, f"{self.winner} wins - Back To Home")
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:

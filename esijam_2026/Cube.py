@@ -1,6 +1,7 @@
 from CONSTANTS import *
 import bots.random_square_bot
 import bots.strongest_closest_square_bot
+import bots.rec_strongest_clst_sq_bot
 
 class Cube:
     def __init__(self, row, file, col, image = WHITE_CUBE_IMAGE, transparency = 255):
@@ -143,7 +144,7 @@ class Player(Cube):
 
         move = (0, 0)  # default: stay put
         try:
-            result = bots.strongest_closest_square_bot.choose_move(my_position, dict_of_damage_values, others_positions)
+            result = bots.rec_strongest_clst_sq_bot.choose_move(my_position, dict_of_damage_values, others_positions)
             if result in VALID_BOT_MOVES:
                 move = result
             else:

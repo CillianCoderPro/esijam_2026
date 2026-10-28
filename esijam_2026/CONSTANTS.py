@@ -13,7 +13,7 @@ pygame.display.set_caption(CAPTION)
 #----------------------------------- World -------------------------------------------------
 
 CUBE_SIZE = 35
-NUMBER_OF_CUBES = 13
+NUMBER_OF_CUBES = 11
 NUMBER_OF_LAYERS = 3
 GAP_SIZE = 15# must be greater than 0
 TOP_LAYER = NUMBER_OF_LAYERS - 1

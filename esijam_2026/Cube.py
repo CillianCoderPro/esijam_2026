@@ -139,7 +139,7 @@ class Player(Cube):
 
         dict_of_damage_values = {(coordinates): cube.broken_state_number for coordinates, cube in grid.cube_dict.items()}
         my_position = (self.row, self.file, self.col)
-        others_positions = tuple((player.row, player.file, player.col) for player in list_of_players if player is not self)
+        others_positions = tuple((player.row, player.file, player.col) for player in list_of_players if player is not self and player.state != "eliminated")
 
         move = (0, 0)  # default: stay put
         try:

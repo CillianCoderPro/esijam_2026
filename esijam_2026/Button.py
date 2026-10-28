@@ -2,7 +2,7 @@ import pygame
 
 class Button:
 
-    def __init__(self, x, y, width, height, screen, font = None, text = "button", colour = (230, 230, 230)):
+    def __init__(self, x, y, width, height, screen, font = None, text = "button", colour = (230,210,210)):
         self.x = x
         self.y = y
         self.width = width
@@ -45,7 +45,7 @@ class Button:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
             hover_square = pygame.Surface((self.width, self.height))
             button_square = pygame.Surface((self.width - 6, self.height - 6))
-            button_square.fill((230,210,210))
+            button_square.fill((210,210,230))
             hover_square.fill((0,0,0))
             self.screen.blit(hover_square, (self.screen_x(), self.screen_y()))
             self.screen.blit(button_square, (self.screen_x() + 3, self.screen_y() + 3))

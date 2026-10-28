@@ -127,39 +127,7 @@ class Player(Cube):
         if target_position in grid.cube_dict:
             self.row, self.file, self.col = target_position
 
-    def draw(self):
-        if self.state == "eliminated":
-            return
-        SCREEN.blit(self.image, self.screen_position())
-
-    """
-    # ----------- Bot Players ----------
-
     def bot_turn(self, grid, list_of_players):
-        if self.state != "alive":
-            return
-
-        #---- Basic Bot Logic ----
-        candidates = []
-        for d_row, d_file in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-            pos = (self.row + d_row, self.file + d_file, self.col)
-            cube = grid.cube_dict.get(pos)
-            if cube:
-                candidates.append(cube)
-        if not candidates:
-            return
-
-        strongest_cube = candidates[0]
-        for cube in candidates:
-            if cube.broken_state_number <= strongest_cube.broken_state_number:
-                strongest_cube = cube
-        movement_coords = (strongest_cube.row - self.row, strongest_cube.file - self.file, strongest_cube.col -self.col)
-        #---- ---- ----
-
-        self.move(movement_coords[0], movement_coords[1], movement_coords[2], grid, list_of_players)
-        """
-
-    def bot_turn_2(self, grid, list_of_players):
         """
         :param self: type player/cube object
         :param grid: type grid object

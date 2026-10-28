@@ -143,7 +143,7 @@ class GameScene(Scene):
         self.frame +=1
         if self.frame % BOT_MOVE_INTERVAL == 0: # delay between bot decisions
             for bot in self.list_of_bots:
-                bot.bot_turn_2(self.grid, self.all_players())
+                bot.bot_turn(self.grid, self.all_players())
         list_of_alive_players = [player for player in self.all_players() if player.state != "eliminated"]
         if len(list_of_alive_players) <= 1:
             if list_of_alive_players:
